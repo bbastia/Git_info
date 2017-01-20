@@ -1,0 +1,234 @@
+
+					Git Notes
+
+1.check git cnfiguration
+	git config -l 
+
+
+2.setting user name 
+	git config --global user.name "bbastia"
+
+3.Setting email address 
+	git config --global user.email "biswajitbastia2@gmail"
+
+4.Creating keygen
+	ssh-keygen -t rsa -c "biswajitbastia2@gmail.com"
+
+5.check ssh key succefully configured 
+	ssh -T git@github.com
+	
+6.Cloning project 
+	git clone git@github.com:bbastia/SpringMVC.git
+
+
+7.check git pointing location
+	git remote
+	git remote -v
+
+8.checking status 
+	git status
+	git status -s
+
+9.check modifed file 
+	git diff <filepath + filename>
+	git blame <filename>
+	git difftool ./filepath
+
+
+10.Adding file to git
+	git add filename
+	
+11.commit the change with comment 
+	git commit -m "commting new change"
+
+12.pushing local change to server 
+	git push
+
+13.create new repo in local/turn git repository 
+	git init
+
+14.create a new file 
+	vim README.md
+
+15.add to local repo
+	git add README.md
+
+16.commit in local
+	git commit -m "commiting code for README.md file"
+
+17.create new fresh repo in github add the origin to locol repo
+	git remote add orgin git@github.com:bbastia/GIT.git
+
+18.pushing code to github
+	git push -u orgin master
+
+19.add git modified file at a time all
+	git add .
+
+20.get github repo in ur local system 
+	git clone git@github.com:bbastia/GIT.git
+
+21. add .gitignore file mostly for library jar file 
+
+22.forking by using fork icon
+	git clone git@github.com:bbastia/httpbin.git
+
+23.create a branch 
+	git checkout  -b better-readme
+	
+
+24.modification 
+	vim README.md
+	git add README.md
+	git commit -m "better readme file"
+	git push -u origin better-readme
+
+25.adding upstream/server/the person u forked from to remote 
+	git remote add <name/server/person> <url>
+	git remote add upstream git@github.com:Runscope/httpbin.git
+
+	example:
+	$ git remote -v
+	origin  git@github.com:bbastia/httpbin.git (fetch)
+	origin  git@github.com:bbastia/httpbin.git (push)
+	upstream        git@github.com:Runscope/httpbin.git (fetch)
+	upstream        git@github.com:Runscope/httpbin.git (push)
+
+ 
+
+26.to get log 
+	git log
+	
+27.to update the tracking change to local repo from server repo
+	git pull (from your branch )
+	git pull upstream master (pulling from the source where u forked )
+
+
+28.reset get specified file 
+	git add . (added vendor dircotory which u dont want)
+	git reset vendor 
+	
+
+29.Discard changes in working directory 
+	git checkout --
+
+30.Stagging 
+	git add -p
+	
+	example:
+	Stage this hunk [y,n,q,a,d,/,e,?]? s
+	y - stage this hunk
+	n - do not stage this hunk
+	q - quit; do not stage this hunk or any of the remaining ones
+	a - stage this hunk and all later hunks in the file
+	d - do not stage this hunk or any of the later hunks in the file
+	g - select a hunk to go to
+	/ - search for a hunk matching the given regex
+	j - leave this hunk undecided, see next undecided hunk
+	J - leave this hunk undecided, see next hunk
+	k - leave this hunk undecided, see previous undecided hunk
+	K - leave this hunk undecided, see previous hunk
+	s - split the current hunk into smaller hunks
+	e - manually edit the current hunk
+	? - print help
+
+
+31.git reset staging 
+	git reset -p
+	
+
+32.differnece 
+	git diff
+	git diff -p (staging )
+	 
+
+33.getting history git comment and view the changes 
+	git log
+	$ git log
+	
+	example:
+	commit 013fdabd6cf2ea517702c1e09b844097ba26461d
+	Author: bbastia <biswajitbasti2@gmail.com>
+	Date:   Fri Jan 20 17:11:06 2017 +0530
+
+    Readme file added
+
+	commit 7e5999055309fea56e7618df4bf781e49cc1700d
+	Author: bbastia <biswajitbasti2@gmail.com>
+	Date:   Fri Jan 20 16:57:12 2017 +0530
+
+     Please enter the commit message for your changes. Lines starting
+    code commite for adding header tag
+
+	commit fd79334004bc69a98d2dfb3608bdffa46d07d051
+	Author: bbastia <biswajitbasti2@gmail.com>
+	Date:   Fri Jan 20 16:52:57 2017 +0530
+
+    adding index.html
+
+	Example:
+	$ git cat-file -p fd793
+	
+	tree 772d9288cec7ce233e64c3a18e5f83d181fc58a9
+	parent 6ff8d5a9bf7b42f5d3ead5ed29241af5f4b8f9af
+	author bbastia <biswajitbasti2@gmail.com> 1484911377 +0530
+	committer bbastia <biswajitbasti2@gmail.com> 1484911377 +0530
+
+	adding index.html
+
+34.checking the tree 
+	$ git cat-file -p fd793
+	tree 772d9288cec7ce233e64c3a18e5f83d181fc58a9
+	parent 6ff8d5a9bf7b42f5d3ead5ed29241af5f4b8f9af
+	author bbastia <biswajitbasti2@gmail.com> 1484911377 +0530
+	committer bbastia <biswajitbasti2@gmail.com> 1484911377 +0530
+
+	adding index.html
+
+	exmaple:
+	$ git cat-file -p 772d9
+	100644 blob fcf2afe3f40b7d6c07b337b4bf2d67988e68145f    .gitignore
+	100644 blob 718ea753bbcb7c76470767ca50187b9cecc24f9d    pom.xml
+	040000 tree 42e83b92a4acfbadb0449800c5b1752302d8eb5f    src
+	040000 tree deaa33786e4ff68af753129ac2db8cb769ecb16b    webapp
+
+
+35. LOG
+	git log
+	git log --raw
+	git log --stat (colorfull summery )
+	page down for more view
+
+36.online git log
+	git log --oneline
+	git log --oneline --decorate (shows tags and branch name )
+	git log --oneline --decorate --graph
+	git log --oneline --decorate --graph --all (shows ur branch with others )
+
+37.
+
+38.
+
+39.
+
+40.
+
+41.
+
+42.
+
+43.
+
+44.
+
+45.
+
+46.
+
+47.
+
+48.
+
+49.
+
+50.
