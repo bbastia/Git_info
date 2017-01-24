@@ -205,19 +205,82 @@
 	git log --oneline --decorate --graph
 	git log --oneline --decorate --graph --all (shows ur branch with others )
 
-37.
+37.Creating branch 
+	git branch fixtypo
+	git checkout -b fixtypo (create brnahc if doesnt exist and loginto it)
 
-38.
+38.See all branch
+	cat .git/refs/heads/
+	ls -la .git/refs/heads
 
-39.
+39.Merging 
+	first checkout to master brnach then merge the branch to master 
+	git checkout master
+	git merge fixtypo
+	
 
-40.
+40.git clone with new folder 
+   git clone git@github.com:bbastia/GIT.git more-practice (with extra arguments for creating new directory )
+	
 
-41.
+41.git push --set-upstream origin newbranch (pushing newbranch code to origin)
 
-42.
+42. git conflicted
+	git checkout conflicted (created conflicted branch and change in code )
+	git merge conflicted 
+	
+	example :
+	$ git merge conflicted
+	Auto-merging webapp/index.html
+	CONFLICT (content): Merge conflict in webapp/index.html
+	Automatic merge failed; fix conflicts and then commit the result.
 
-43.
+	example :
+	$ cat index.html
+<html>
+        <title>Git Web</title>
+
+        <head></head>
+        <script>
+        var i=10;
+        $document.ready(function(){
+                $("p").click(function(){
+<<<<<<< HEAD
+                        $(this).click(function(){
+                                $(this).exit();
+                        });
+=======
+                $(this).toggleup(200).toggleDown(300);
+>>>>>>> conflicted
+                });
+        });
+
+        </script>
+        <body>
+
+                <h1>this is heading</h1>
+                <p>this paragraph</p>
+                <p>heyy</p>
+
+                Added some toggle functionalities ...
+
+                biswajit bastia
+                <strong>how you doing</strong>
+        </body>
+
+</html>
+
+
+43.undo git conflict :
+	$ git merge --abort
+
+	Example:
+	$ git push --set-upstream origin conflicted
+	Total 0 (delta 0), reused 0 (delta 0)
+	To github.com:bbastia/SpringMongoDb.git
+	* [new branch]      conflicted -> conflicted
+	Branch conflicted set up to track remote branch conflicted from origin.
+
 
 44.
 
