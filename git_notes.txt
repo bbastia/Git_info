@@ -1,4 +1,4 @@
-
+﻿
 					Git Notes
 
 1.check git cnfiguration
@@ -42,7 +42,8 @@
 	git commit -m "commting new change"
 
 12.pushing local change to server 
-	git push
+	$git push
+	$git push -u origin branh1 (push to specified branch)	
 
 13.create new repo in local/turn git repository 
 	git init
@@ -213,7 +214,7 @@
 	cat .git/refs/heads/
 	ls -la .git/refs/heads
 
-39.Merging 
+39.Merging  (Fast Forward)
 	first checkout to master brnach then merge the branch to master 
 	git checkout master
 	git merge fixtypo
@@ -282,16 +283,187 @@
 	Branch conflicted set up to track remote branch conflicted from origin.
 
 
-44.
+44. Undo change in git 
+	git checkout -- web/index.html (if it unstaged )
+	else
+	git reset (make all unstage )
+	git checkout -- web/index.html
+	
 
 45.
+	$git reset --hard a1fo7
+	$git reflog
 
-46.
+46.Git Merge without dont fast forward 
+	$git merge --no-ff instalation-instructions 
+	
+	Example:
+	$ git log --oneline --decorate --graph --all
+	*   8dd029d (HEAD -> master) Merge branch 'installation-instruction'
+	|\
+	| * ea103c3 (installation-instruction) someline added to README.md
+	|/
+	*   221a6bd (origin/master) Merge branch 'conflicted fixed the conflicted code
+	|\
+	| * 5f1fd5d (origin/conflicted, conflicted) adding some imporved features
+	* | bc57482 adding other functionalites
+	|/
+	* 013fdab Readme file added
+	* 7e59990  Please enter the commit message for your changes. Lines starting code commite for adding header tag
+	* fd79334 adding index.html
+	* 6ff8d5a first commit for new SpringMongoDb project
 
-47.
 
-48.
+47.Git rebase (if your branch is oudated with master branch )
+	$git checkout -b newFeatures 
+	some change in master branch 
+	to rebase newFeatures branch with master branch
+	$git rebase master 
 
-49.
+48. conflicted Rebase 
+	Example:
+	bbastia@BBASTIA-H11CZ MINGW64 ~/Desktop/GitPractice/Maven/SpringMongoDb (experimental)
+	$ git rebase master
+	First, rewinding head to replay your work on top of it...
+	Applying: contibuting file added for pull request
+	Using index info to reconstruct a base tree...
+	.git/rebase-apply/patch:7: trailing whitespace.
+	pull requested accepted here
+	warning: 1 line adds whitespace errors.
+	Falling back to patching base and 3-way merge...
+	Auto-merging contributing.md
+	CONFLICT (add/add): Merge conflict in contributing.md
+	error: Failed to merge in the changes.
+	Patch failed at 0001 contibuting file added for pull request
+	The copy of the patch that failed is found in: .git/rebase-apply/patch
 
-50.
+	When you have resolved this problem, run "git rebase --continue".
+	If you prefer to skip this patch, run "git rebase --skip" instead.
+	To check out the original branch and stop rebasing, run "git rebase --abort".
+	
+	to abort :
+	$git rebase --abort 
+	
+
+49.To correct conflicted rebase 
+	$ git status
+	rebase in progress; onto 6d9d9fb
+	You are currently rebasing branch 'experimental' on '6d9d9fb'.
+  (fix conflicts and then run "git rebase --continue")
+  (use "git rebase --skip" to skip this patch)
+  (use "git rebase --abort" to check out the original branch)
+
+	Unmerged paths:
+  (use "git reset HEAD <file>..." to unstage)
+  (use "git add <file>..." to mark resolution)
+
+        both added:      contributing.md
+
+	no changes added to commit (use "git add" and/or "git commit -a")
+	
+50.rebase continue ..
+	$ git commit
+	[detached HEAD 6a87360] commit for rebase conflict fix
+	1 file changed, 3 insertions(+), 1 deletion(-)
+
+	bbastia@BBASTIA-H11CZ MINGW64 ~/Desktop/GitPractice/Maven/SpringMongoDb (experimental|REBASE 1/2)
+	$ git status
+	rebase in progress; onto 6d9d9fb
+	You are currently rebasing branch 'experimental' on '6d9d9fb'.
+	(all conflicts fixed: run "git rebase --continue")
+
+	nothing to commit, working tree clean					  
+
+50.git rebase in intractive mode
+	$git rebase -i HEAD~2 (prev two commit )
+	
+51.git force push 
+    git push -f
+
+52.git Status Master
+	$git log -stat master head
+
+53.diff tool
+	$git config diff.tool vimtool
+	$git config diff.tool meld
+	installing it http://sourceforge.net/projects/meld-installer/
+	I had to tell git where it was:
+	git config --global merge.tool meld
+	git config --global diff.tool meld
+	git config --global mergetool.meld.path “C:\Program Files (x86)\Meld\Meld.exe”
+	
+	Example: 
+	$ git difftool  master
+	$ git difftool -d master (all at once )
+
+
+54.Tag
+	$git tag tag1
+	$git tag -a ver1.0
+	
+
+55.show tag
+	git show tag1
+	git show ver1.0
+	
+
+56.Relase the tag on github
+	$git push origin v1.0 
+
+57.Delete branch: first go to master branch then run below command 
+$ git branch -D branch2
+
+
+58.Remove file from git repo 
+  $ git rm biswa.xml
+
+59.update the last commit message 
+ $ git commit --amend
+
+
+60.
+
+61.
+
+62.
+
+63.
+
+64.
+
+65.
+
+66.
+
+67.
+
+68.
+
+69.
+
+70.
+	
+NOTE:
+t is important to contrast the design philosophy of git with the philosophy of a more traditional source control tool like svn.
+
+Subversion was designed and built with a client/server model. There is a single repository that is the server, and several clients can 
+fetch code from the server, work on it, then commit it back to the server. The assumption is that the client can always contact the server
+ when it needs to perform an operation.
+
+Git was designed to support a more distributed model with no need for a central repository (though you can certainly use one if you like.)
+ Also git was designed so that the client and the "server" don't need to be online at the same time. Git was designed so that people on 
+ an unreliable link could exchange code via email, even. It is possible to work completely disconnected and burn a CD to exchange code via git.
+
+In order to support this model git maintains a local repository with your code and also an additional local repository that mirrors 
+the state of the remote repository. By keeping a copy of the remote repository locally, git can figure out the changes needed even 
+when the remote repository is not reachable. Later when you need to send the changes to someone else, git can transfer them as a 
+set of changes from a point in time known to the remote repository.
+
+git fetch is the command that says "bring my local copy of the remote repository up to date."
+git pull says "bring the changes in the remote repository where I keep my own code."
+Normally "git pull" does this by doing a "git fetch" to bring the local copy of the remote repository up to date, and then 
+merging the changes into your own code repository and possibly your working copy.
+
+The take away is to keep in mind that there are often at least three copies of a project on your workstation. One copy is 
+your own repository with your own commit history. The second copy is your working copy where you are editing and building. 
+The third copy is your local "cached" copy of a remote repository.
